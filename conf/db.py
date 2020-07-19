@@ -11,10 +11,10 @@ from sqlalchemy.orm import sessionmaker
 
 # 数据库配置
 DB_HOST = os.environ.get("DB_HOST", "127.0.0.1")
-DB_USER = os.environ.get("DB_USER", "root")
-DB_PWD = os.environ.get("DB_PWD", "31280c9adec2")
+DB_USER = os.environ.get("DB_USER", "honeypot")
+DB_PWD = os.environ.get("DB_PWD", "123456")
 DB_PORT = os.environ.get("DB_PORT", "45212")
-DB_NAME = os.environ.get("DB_NAME", 'honeypot')
+DB_NAME = os.environ.get("DB_NAME", 'honeyAnlyse')
 
 # 创建对象基类
 Base = declarative_base()
