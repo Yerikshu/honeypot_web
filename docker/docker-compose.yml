@@ -1,0 +1,8 @@
+version: "2.0"
+services:
+    honeypot:
+        image: registry.cmic.site:5000/sg/honeypot:latest
+        ports:
+            - "12149:80"
+        restart: always
+        command: python server.py --port=80
