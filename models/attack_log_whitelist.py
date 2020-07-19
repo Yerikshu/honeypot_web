@@ -9,7 +9,7 @@ from sqlalchemy import Column, String, Integer, Unicode, TIMESTAMP, Boolean
 from conf.db import Base, engine
 
 
-class attack_log(Base):
+class attack_log_whitelist(Base):
     __tablename__ = 'attack_log_whitelist'
 
     id = Column(Integer, autoincrement=True, primary_key=True)
