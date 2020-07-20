@@ -47,9 +47,9 @@ bash install/install_opencanary_agent.sh
 
 
 ## 离线包下载
-[docker-19.03.9.tgz](https://github.com)
+[docker-19.03.9.tgz](https://github.com/Yerikshu/honeypot_web/releases/tag/beta)
 
-[honey-agent.tar.gz](https://github.com)
+[honey-agent-2-0.tar.gz](https://github.com/Yerikshu/honeypot_web/releases/tag/2.0)
 
 ## 安装蜜罐
 
