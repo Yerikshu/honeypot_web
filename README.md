@@ -36,7 +36,7 @@ docker pull ccr.ccs.tencentyun.com/otherproject/honeypot-agent:latest
 
 # 安装
 
-## 自动话安装
+## 自动化安装
 直接执行命令
 ```
 bash install/install_opencanary_agent.sh
