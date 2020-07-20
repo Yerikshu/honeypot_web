@@ -16,9 +16,9 @@ class white_list(Base):
     dst_ip = Column(String(20), nullable=False, primary_key=True)
 
 
-def init_db():
-    Base.metadata.create_all(engine)
+    def init_db():
+        Base.metadata.create_all(engine)
 
 
-def drop_db():
-    Base.metadata.drop_all(engine)
+    def drop_db():
+        Base.metadata.drop_all(engine)

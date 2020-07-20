@@ -9,7 +9,7 @@
 from sqlalchemy.exc import InvalidRequestError
 
 from conf.db import DBSession
-from models import attack_log_whitelist
+from models.white_list import white_list
 
 
 class white_new:
@@ -21,7 +21,7 @@ class white_new:
     # 查询白名单新表数据
     def white_ip(self):
         try:
-            white_ip_res = self.session.query(attack_log_whitelist).all()
+            white_ip_res = self.session.query(white_list).all()
             return white_ip_res
         except InvalidRequestError:
             self.session.rollback()
@@ -33,7 +33,7 @@ class white_new:
     # 增加白名单
     def insert_white_ip(self, src_host):
         try:
-            wip_insert = attack_log_whitelist(sourceip=src_host)
+            wip_insert = white_list(sourceip=src_host)
             self.session.merge(wip_insert)
         except InvalidRequestError:
             self.session.rollback()
@@ -41,3 +41,5 @@ class white_new:
             print(e)
         finally:
             self.session.close()
+
+    # TODO:增加白名单之后需要更新入库的数据

@@ -46,7 +46,6 @@ class attack_log_whitelist(Base):
     src_host = Column(String(50), nullable=True)
     src_port = Column(Integer, nullable=False)
     white = Column(Integer, nullable=False)
-    # 扩表
     repo = Column(String(150), nullable=True)
     ntp_cmd = Column(String(150), nullable=True)
     args = Column(String(150), nullable=True)
