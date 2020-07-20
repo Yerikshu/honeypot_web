@@ -1,8 +1,18 @@
-version: "2.0"
-services:
-    honeypot:
-        image: registry.cmic.site:5000/sg/honeypot:latest
-        ports:
-            - "12149:80"
-        restart: always
-        command: python server.py --port=80
+# 配置文件还需要修正
+#version: "2.0"
+#services:
+#    honeypot:
+#        image: honeypot:latest
+#        ports:
+#            - "12149:8000"
+#        restart: always
+#        command: uvicorn main:app --reload
+#    mariadb:
+#        image: 'mariadb'
+#        restart: always
+#        volumes:
+#          - './mariadb_data:/bitnami/mariadb'
+#        environment:
+#          - MARIADB_ROOT_PASSWORD=123456
+
+
