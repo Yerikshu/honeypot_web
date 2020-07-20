@@ -53,26 +53,29 @@ bash install/install_opencanary_agent.sh
 
 ## 安装蜜罐
 
-通过sftp上传docker二进制文件及蜜罐镜像docker-19.03.9.tgz
-
-
-tar -zxvf docker-19.03.9.tgz && cp docker/* /usr/bin/ && tar -zxvf honey-agent.tar.gz
-
+通过sftp上传docker二进制文件及蜜罐镜像之后解压缩
+```
+tar -zxvf docker-19.03.9.tgz && cp docker/* /usr/bin/ && tar -zxvf honey-agent-2-0.tar.gz
+```
 启动docker服务   
+```
 dockerd &
-
-加载镜像
+```
+导入镜像
+```
 docker load < honey-agent-2-0
-
+```
 创建容器并运行镜像，映射kern.log文件
+```
 setenforce 0
 docker run -itd --name honey  --network=host -v /var/log/kern.log:/var/log/kern.log honeypot-agent:2.0
-
+```
 进入容器
+```
 docker exec -it honey bash
-vi /root/.opencanary.conf  --->>>修改节点名称以及配置对应的4a地址，其他不用改
+vi /root/.opencanary.conf  --->>>修改节点名称以及配置对应的master地址，其他不用改
 opencanaryd --start
-
+```
 
 
 # agen版本介绍
