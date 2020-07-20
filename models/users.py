@@ -16,6 +16,7 @@ class user(Base):
     id = Column(Integer, autoincrement=True, primary_key=True)
     username = Column(String(50), nullable=False)
     password = Column(String(32), nullable=False)
+    bussiness = Column(String(32), nullable=False)  # 区分管理员所属业务
     create_time = Column(TIMESTAMP, default=datetime.now)
 
 

@@ -16,7 +16,8 @@ class attack_log(Base):
     dst_host = Column(String(50), nullable=False)
     dst_port = Column(Integer, nullable=False)
     honeycred = Column(Boolean, nullable=True)
-    local_time = Column(TIMESTAMP, nullable=False)
+    local_time = Column(String(255), nullable=False)
+    update_time = Column(TIMESTAMP, nullable=False)
     hostname = Column(String(50), nullable=True)
     password = Column(String(50), nullable=True)
     path = Column(Unicode(50), nullable=True)
@@ -45,7 +46,6 @@ class attack_log(Base):
     src_host = Column(String(50), nullable=True)
     src_port = Column(Integer, nullable=False)
     white = Column(Integer, nullable=False)
-    # 扩表
     repo = Column(String(150), nullable=True)
     ntp_cmd = Column(String(150), nullable=True)
     args = Column(String(150), nullable=True)
