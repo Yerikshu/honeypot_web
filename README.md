@@ -37,7 +37,42 @@ docker pull ccr.ccs.tencentyun.com/otherproject/honeypot-agent:latest
 
 # 安装
 
-## 在线安装
+## 自动话安装
+直接执行命令
+```
+bash install/install_opencanary_agent.sh
+```
 
-## 离线安装
+## 手动安装
 考虑到有些业务环境下不允许访问外网，这个时候可以通过ftp的形式将这些镜像文件、docker离线包上传到主机，
+
+
+## 离线包下载
+[docker-19.03.9.tgz](https://github.com)
+
+[honey-agent.tar.gz](https://github.com)
+
+## 安装蜜罐
+
+通过sftp上传docker二进制文件及蜜罐镜像docker-19.03.9.tgz
+
+
+tar -zxvf docker-19.03.9.tgz && cp docker/* /usr/bin/ && tar -zxvf honey-agent.tar.gz
+
+## 启动docker服务   
+dockerd &
+
+## 加载镜像
+docker load < honey-agent-2-0
+
+## 创建容器并运行镜像，映射kern.log文件
+setenforce 0
+docker run -itd --name honey  --network=host -v /var/log/kern.log:/var/log/kern.log honeypot-agent:2.0
+
+## 进入容器
+docker exec -it honey bash
+vi /root/.opencanary.conf  --->>>修改节点名称以及配置对应的4a地址，其他不用改
+opencanaryd --start
+
+
+
