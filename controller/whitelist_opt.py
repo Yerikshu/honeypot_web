@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # @Author   : yerikyu
-# @Date     : 7/19/20
+# @Date     : 7/20/20
+# @Time     : 4:53 PM
 # @Purpose  : 白名单表操作
+
 
 from sqlalchemy.exc import InvalidRequestError
 
@@ -10,7 +12,7 @@ from conf.db import DBSession
 from models import attack_log_whitelist
 
 
-class log_whitelist:
+class white_new:
     """增删改查"""
 
     def __init__(self):
