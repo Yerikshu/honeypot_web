@@ -83,11 +83,15 @@ service iptables save  ## 保存策略
 ```
 #### 测试扫描日志
 
+```
 curl http://127.0.0.1:443
-tail -f /var/log/kern.log  查看是否出现源地址为本机，目的端口为443的日志
+```
+查看是否出现源地址为本机，目的端口为443的日志
 
+```
+tail -f /var/log/kern.log 
 canaryfw: IN=lo OUT= MAC=00:00:00:00:00:00:00:00:00:00:00:00:08:00 SRC=127.0.0.1 DST=127.0.0.1 LEN=40 TOS=0x00 PREC=0x00 TTL=64 ID=54161 DF PROTO=TCP SPT=443 DPT=39104 WINDOW=0 RES=0x00 ACK RST URGP=0
-
+```
 
 ### docker环境配置
 
@@ -176,3 +180,5 @@ opencanaryd --start
 原因是时区问题，解决办法如下：
 修改 /usr/local/lib/python2.7/site-packages/opencanary/logger.py
 在176行，scheduler = TwistedScheduler()，修改为scheduler = TwistedScheduler(timezone="Asia/Shanghai")  ，强行设置为与操作系统相同的东八区即可
+
+# 后面有时间的话再提供物理机独立部署的攻略，也是挺麻烦的
