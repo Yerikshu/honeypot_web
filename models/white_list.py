@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Author   : yerikyu
 # @Date     : 7/19/20
-# @Purpose  : 白名单表
+# @Purpose  : 白名单表,可以根据需要过滤源目端口以及ip
 from sqlalchemy import Column, String
 
 from conf.db import Base, engine
@@ -16,9 +16,9 @@ class white_list(Base):
     dst_ip = Column(String(20), nullable=False, primary_key=True)
 
 
-    def init_db():
-        Base.metadata.create_all(engine)
+def init_db():
+    Base.metadata.create_all(engine)
 
 
-    def drop_db():
-        Base.metadata.drop_all(engine)
+def drop_db():
+    Base.metadata.drop_all(engine)
