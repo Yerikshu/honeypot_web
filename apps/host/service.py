@@ -7,7 +7,7 @@
 import datetime
 import hashlib
 
-from apps.controller.dto.host import Host
+from apps.host.opt import Host
 
 host = Host()
 
