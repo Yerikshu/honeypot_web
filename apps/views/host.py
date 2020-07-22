@@ -10,7 +10,7 @@ from typing import Optional
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-from controller.service.host import hoststatus
+from apps.controller.service import hoststatus, getHoststatus
 
 host = FastAPI()
 
@@ -32,4 +32,13 @@ async def agent_host(item: Optional[host_info] = None):
 
     # 主机信息入库
     if hoststatus(lasttime, hostname, ip, status):
-        log.write("insert status data ok")
+        # TODO:这个地方是要配置日志记录，后续写上
+        # log.write("insert status data ok")
+        pass
+
+
+# TODO:注意完成jwt鉴权操作
+# @jwtauth
+@host.get("/host")
+async def agent_host_status():
+    return getHoststatus()

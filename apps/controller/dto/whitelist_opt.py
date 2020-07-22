@@ -9,7 +9,7 @@
 from sqlalchemy.exc import InvalidRequestError
 
 from conf.db import DBSession
-from models.white_list import white_list
+from apps.models.white_list import white_list
 
 
 class white_new:

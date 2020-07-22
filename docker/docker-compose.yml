@@ -6,7 +6,7 @@
 #        ports:
 #            - "12149:8000"
 #        restart: always
-#        command: uvicorn main:app --reload
+#        command: uvicorn main:apps --reload
 #    mariadb:
 #        image: 'mariadb'
 #        restart: always
