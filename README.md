@@ -1,5 +1,5 @@
 # 蜂蜜坛子分析系统
-具备的功能
+具备的功能（未完待续）
 - 核心功能
     - 白名单对已入库数据进行重新整理
     - 搜索功能
@@ -121,16 +121,20 @@ opencanaryd --start
 
 
 # agen版本介绍
+[大部分源码](https://github.com/Yerikshu/opencanary)这个项目，自己个性化部署后续陆续加上，还没来得及整理好
 
 ## 2.0
 基础版本，由于之前在测试的时候已经做了一系列的迭代，所以这个公开的时候就直接上升到2.0，后续都在这个基础上升级迭代
 
 ## 2.1
-增加crontab功能，对agent状态进行监测，宕机自动恢复
+[] 增加crontab功能
+[] 对agent状态进行监测
+[] 宕机自动恢复
 
+# 后面有时间的话再提供物理机独立部署的攻略，也是挺麻烦的
 
 # 注意：超级坑爹的bug  
-有时候会出现这个错误：
+这个是有时候在部署的过程中会出现这个错误：
 ```
 2020-06-29T15:42:30+0800 [-] Unhandled Error
         Traceback (most recent call last):
@@ -181,4 +185,3 @@ opencanaryd --start
 修改 /usr/local/lib/python2.7/site-packages/opencanary/logger.py
 在176行，scheduler = TwistedScheduler()，修改为scheduler = TwistedScheduler(timezone="Asia/Shanghai")  ，强行设置为与操作系统相同的东八区即可
 
-# 后面有时间的话再提供物理机独立部署的攻略，也是挺麻烦的
