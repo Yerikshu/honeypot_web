@@ -3,7 +3,7 @@
 # @Author   : yerikyu
 # @Date     : 7/19/20
 # @Purpose  :
-from routers import router
+from apps.base_route import router
 
 
 @router.get("/users/", tags=["users"])

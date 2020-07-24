@@ -1,12 +1,27 @@
-from fastapi import FastAPI
+from typing import List
 
-import routers
+import uvicorn
+from fastapi import FastAPI, APIRouter, Body
+
+from apps.base_route import router
+from test.base_route import GzipRoute
+
+app = FastAPI()
+app.include_router(router, prefix="/api")
+# app.router.route_class = GzipRoute
 
 
-def create_app():
-    app = FastAPI()
-    app.include_router(routers.router, prefix="/api")
-    return app
+# @app.post("/sum")
+# async def sum_numbers(numbers: List[int] = Body(...)):
+#     return {"sum": sum(numbers)}
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
 
 
-app = create_app()
+if __name__ == '__main__':
+    uvicorn.run(app='main:app', host="127.0.0.1", port=8000, reload=True, debug=True)
+
+
+
