@@ -1,7 +1,7 @@
 from typing import List
 
 import uvicorn
-from fastapi import FastAPI, APIRouter, Body
+from fastapi import FastAPI
 
 from apps.base_route import router
 from test.base_route import GzipRoute
