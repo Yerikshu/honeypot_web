@@ -26,3 +26,21 @@ def init_db():
 
 def drop_db():
     Base.metadata.drop_all(engine)
+
+
+if __name__ == "__main__":
+    drop_db()
+    print('Drop user table')
+
+    init_db()
+    print('create user table')
+
+# SQL
+# CREATE TABLE user (
+# 	id INTEGER NOT NULL AUTO_INCREMENT,
+# 	username VARCHAR(50) NOT NULL,
+# 	password VARCHAR(32) NOT NULL,
+# 	bussiness VARCHAR(32) NOT NULL,
+# 	create_time TIMESTAMP NULL,
+# 	PRIMARY KEY (id)
+# )

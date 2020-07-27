@@ -22,3 +22,20 @@ def init_db():
 
 def drop_db():
     Base.metadata.drop_all(engine)
+
+
+if __name__ == "__main__":
+    drop_db()
+    print('Drop white_list table')
+
+    init_db()
+    print('create white_list table')
+
+# SQL
+# CREATE TABLE white_list (
+# 	source_port VARCHAR(10) NOT NULL,
+# 	source_ip VARCHAR(20) NOT NULL,
+# 	dst_port VARCHAR(10) NOT NULL,
+# 	dst_ip VARCHAR(20) NOT NULL,
+# 	PRIMARY KEY (source_port, source_ip, dst_port, dst_ip)
+# )
