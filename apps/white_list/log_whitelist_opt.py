@@ -12,8 +12,6 @@ from apps.models.attack_log_whitelist import attack_log_whitelist
 
 
 class log_whitelist_opt:
-    """增删改查"""
-
     def __init__(self):
         self.session = DBSession
 
