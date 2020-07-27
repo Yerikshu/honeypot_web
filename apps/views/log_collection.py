@@ -4,10 +4,11 @@
 # @Date     : 7/24/20
 # @Time     : 5:00 PM
 # @Purpose  : 接收agent的日志请求
+import json
 from typing import Optional
 
 from loguru import logger
-from pydantic import BaseModel, json
+from pydantic import BaseModel
 
 from apps.base_route import router
 from apps.controller.service.analyse_log import parserlog
@@ -23,5 +24,5 @@ class item(BaseModel):
 @router.post("/log")
 @logger.catch
 async def receive_agent_log(item: Optional[item] = None):
-    item = json.load(item.param)
+    item = json.loads(item.param.lower())
     parserlog(item)
