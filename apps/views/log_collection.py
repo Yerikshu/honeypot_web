@@ -11,7 +11,7 @@ from loguru import logger
 from pydantic import BaseModel
 
 from apps.base_route import router
-from apps.controller.service.analyse_log import parserlog
+from apps.utils.analyse_log import parserlog
 
 
 # 由于发送过来的日志内容很多,

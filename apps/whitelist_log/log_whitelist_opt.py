@@ -8,7 +8,7 @@ from sqlalchemy import desc, extract, func
 from sqlalchemy.exc import InvalidRequestError
 
 from conf.db import DBSession
-from apps.white_list.attack_log_whitelist import attack_log_whitelist
+from apps.whitelist_log.attack_log_whitelist import attack_log_whitelist
 
 
 class log_whitelist_opt:
