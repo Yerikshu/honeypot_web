@@ -154,9 +154,10 @@ def parserlog(jsonlog):
         if dst_host:
             if src_host:
                 # 判断攻击主机是否存在于白名单列表内
+
+
                 if (src_host, dst_host,
-                    dst_port) in whiteiplist() or dst_host == src_host or src_host in whiteiplist_scanner() or (
-                        src_host, dst_port) in whiteiplist_4A():
+                    dst_port) in whiteiplist() :
                     white = 1
                     loginst.insert_white(dst_host, dst_port, honeycred, local_time, hostname, password, path, skin, \
                                          useragent, username, session, localversion, remoteversion, df, idid, inin,

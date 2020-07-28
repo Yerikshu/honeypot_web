@@ -4,8 +4,7 @@
 # @Date     : 7/20/20
 # @Time     : 4:53 PM
 # @Purpose  : 白名单表操作
-
-
+from sqlalchemy import desc
 from sqlalchemy.exc import InvalidRequestError
 
 from conf.db import DBSession
@@ -18,11 +17,13 @@ class white_new:
     def __init__(self):
         self.session = DBSession
 
-    # 查询白名单新表数据
-    def white_ip(self):
+    def whitelist_data(self):
         try:
-            white_ip_res = self.session.query(white_list).all()
-            return white_ip_res
+            # 查询白名单表已激活数据
+            white_ip_res_activate = self.session.query(white_list).filter(white_list.activate == 1).order_by(white_list.dst_port).all()
+            # 查询白名单表未激活数据
+            white_ip_res_deactivate = self.session.query(white_list).filter(white_list.activate == 0).all()
+            return white_ip_res_activate, white_ip_res_deactivate
         except InvalidRequestError:
             self.session.rollback()
         except Exception as e:
