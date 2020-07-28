@@ -15,7 +15,7 @@ class log_whitelist_opt:
     def __init__(self):
         self.session = DBSession
 
-    def insert_white(self, param):
+    def insert(self, param):
 
         loginsert = attack_log_whitelist(**param)
 
