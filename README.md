@@ -23,32 +23,9 @@ api设计基于fastapi
 # agent
 蜜罐的agent服务已经打包好并上传在腾讯云的docker 仓库，可以自行下载并安装，agent的[源码](https://github.com/thinkst/opencanary)，由于其目前只能适用于python2版本，后续计划升级到python3版本，目前先制作docker镜像暂时解决代码不能运行在新版服务器上面的问题
 
-下载指令：
-```
-docker pull ccr.ccs.tencentyun.com/otherproject/honeypot-agent:2.1
-```
-需要注意的是对于latest版本，需要自己手动对服务进行编译安装，里面需要自己手动调整配置，个人强烈建议使用2.1版本，后续会根据需要持续迭代新版本
-```
-docker pull ccr.ccs.tencentyun.com/otherproject/honeypot-agent:latest
-```
-## 启动环境
-目前仅仅测试redhat7以及centos7以上，因为对于其版本以下的系统，内核不支持docker服务
 
-# 安装
-
-## 自动化安装
-直接执行命令
-```
-bash install/install_opencanary_agent.sh
-```
-
-## 手动安装
-考虑到有些业务环境下不允许访问外网，这个时候可以通过ftp的形式将这些镜像文件、docker离线包上传到主机，
+具体使用可以看看隔壁agent项目介绍
 
 
-## 离线包下载
-[docker-19.03.9.tgz](https://github.com/Yerikshu/honeypot_web/releases/tag/beta)
-
-[honey-agent-2-0.tar.gz](https://github.com/Yerikshu/honeypot_web/releases/tag/2.0)
-
+https://github.com/Yerikshu/opencanary
 
