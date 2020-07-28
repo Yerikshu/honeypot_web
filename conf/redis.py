@@ -9,5 +9,13 @@
 import redis
 
 
-pool = redis.ConnectionPool(host='localhost', port=6379, decode_responses=True, db=5)
-r = redis.Redis(connection_pool=pool)
+"""pool_activate = redis.ConnectionPool(host='localhost', port=6379, decode_responses=True, db=5, max_connections=10, password=)"""
+pool_activate = redis.BlockingConnectionPool(host='localhost', port=6379, decode_responses=True, db=5, max_connections=10)
+r_activate = redis.Redis(connection_pool=pool_activate)
+
+
+""" pool_deactivate = redis.ConnectionPool(host='localhost', port=6379, decode_responses=True, db=6, max_connections=10, password=)"""
+pool_deactivate = redis.BlockingConnectionPool(host='localhost', port=6379, decode_responses=True, db=6, max_connections=10)
+r_deactivate = redis.Redis(connection_pool=pool_deactivate)
+
+

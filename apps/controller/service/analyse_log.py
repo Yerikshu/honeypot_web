@@ -8,6 +8,13 @@
 import copy
 import datetime
 
+from apps.attack_log.log_opt import log_opt
+from apps.whitelist_log.log_whitelist_opt import log_whitelist_opt
+from conf.redis import r_activate
+
+attack_log = log_opt()
+white_log = log_whitelist_opt()
+
 
 def parserlog(jsonlog):
     # 接收客户端post过来的数据格式化
@@ -155,6 +162,9 @@ def parserlog(jsonlog):
             if src_host:
                 # 判断攻击主机是否存在于白名单列表内
 
+                if dst_host not in r_activate.keys():
+                    # 攻击主机不存在于白名单列表内
+                    pass
 
                 if (src_host, dst_host,
                     dst_port) in whiteiplist() :

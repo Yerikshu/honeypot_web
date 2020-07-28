@@ -4,11 +4,10 @@
 # @Date     : 7/20/20
 # @Time     : 4:53 PM
 # @Purpose  : 白名单表操作
-from sqlalchemy import desc
 from sqlalchemy.exc import InvalidRequestError
 
 from conf.db import DBSession
-from apps.models.white_list import white_list
+from apps.white_list.white_list import white_list
 
 
 class white_new:
