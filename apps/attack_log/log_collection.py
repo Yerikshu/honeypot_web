@@ -10,8 +10,12 @@ from typing import Optional
 from loguru import logger
 from pydantic import BaseModel
 
-from apps.base_route import router
+
+from fastapi.routing import APIRouter
+
 from apps.utils.analyse_log import parserlog
+
+router = APIRouter()
 
 
 # 由于发送过来的日志内容很多,
@@ -19,6 +23,14 @@ from apps.utils.analyse_log import parserlog
 # 还没想好怎么提前做好序列化构造
 class item(BaseModel):
     param: str
+
+
+@router.get("/log/attack")
+@logger.catch
+async def attack_log():
+    pass
+
+
 
 
 @router.post("/log")

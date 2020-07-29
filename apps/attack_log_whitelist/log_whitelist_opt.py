@@ -4,14 +4,17 @@
 # @Date     : 7/20/20
 # @Time     : 9:56 PM
 # @Purpose  : 白名单表操作
+from loguru import logger
 from sqlalchemy import desc, extract, func
 from sqlalchemy.exc import InvalidRequestError
 
 from conf.db import DBSession
-from apps.whitelist_log.attack_log_whitelist import attack_log_whitelist
+from apps.attack_log_whitelist.attack_log_whitelist import attack_log_whitelist
 
 
 class log_whitelist_opt:
+    """增删改查"""
+
     def __init__(self):
         self.session = DBSession
 
@@ -47,7 +50,7 @@ class log_whitelist_opt:
         except InvalidRequestError:
             self.session.rollback()
         except Exception as e:
-            print(e)
+            logger.info(e)
         finally:
             self.session.close()
 
@@ -68,7 +71,7 @@ class log_whitelist_opt:
         except InvalidRequestError:
             self.session.rollback()
         except Exception as e:
-            print(e)
+            logger.error(e)
         finally:
             self.session.close()
 
@@ -81,6 +84,24 @@ class log_whitelist_opt:
                 extract('year', attack_log_whitelist.local_time) == months,
                 attack_log_whitelist.white == 1).group_by('month').all()
             return white_num
+        except InvalidRequestError:
+            self.session.rollback()
+        except Exception as e:
+            print(e)
+        finally:
+            self.session.close()
+
+    # 查询过滤列表总量
+    # 按时间过滤
+    # mintime:yyyy-MM-DD hh:mm:ss
+    # maxtime:yyyy-MM-DD hh:mm:ss
+    def select_filter_total(self, mintime, maxtime):
+        try:
+            total_filter = self.session.query(
+                func.count(attack_log_whitelist.id)).filter(attack_log_whitelist.local_time <= maxtime).filter(
+                attack_log_whitelist.local_time >= mintime
+                ).scalar()
+            return total_filter
         except InvalidRequestError:
             self.session.rollback()
         except Exception as e:
