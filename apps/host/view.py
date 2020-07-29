@@ -9,8 +9,12 @@ from typing import Optional
 from loguru import logger
 from pydantic import BaseModel
 
-from apps.base_route import router
 from apps.host.service import hoststatus, getHoststatus
+
+from fastapi.routing import APIRouter
+
+
+router = APIRouter()
 
 # host = FastAPI(title="主机访问id记录")
 
@@ -20,7 +24,7 @@ from apps.host.service import hoststatus, getHoststatus
 # )
 
 
-class host_info(BaseModel):
+class Host_info(BaseModel):
     hostname: str
     ip: str
     status: str
@@ -28,7 +32,7 @@ class host_info(BaseModel):
 
 @router.post("/host")
 @logger.catch
-async def agent_host(item: Optional[host_info] = None):
+async def agent_host(item: Optional[Host_info] = None):
     """ 接收post过来的主机信息 """
     # 根据蜜罐客户端提交过来请求，以服务器端时间为准（从服务器端生成时间）
     lasttime = datetime.datetime.now()
@@ -45,7 +49,7 @@ async def agent_host(item: Optional[host_info] = None):
 
 # TODO:注意完成jwt鉴权操作
 # @jwtauth
-@router.get("/host")
+@router.get("/gethost")
 @logger.catch
 async def agent_host_status():
     return getHoststatus()

@@ -3,11 +3,14 @@ from typing import List
 import uvicorn
 from fastapi import FastAPI
 
-from apps.base_route import router
-from test.base_route import GzipRoute
+#from test.base_route import GzipRoute
+from apps.host.view import router as h_router
+from apps.white_list.view import router as w_router
 
 app = FastAPI()
-app.include_router(router, prefix="/api")
+app.include_router(h_router, prefix="/api")
+app.include_router(w_router, prefix="/api")
+
 # app.router.route_class = GzipRoute
 
 
