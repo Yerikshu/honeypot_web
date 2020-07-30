@@ -8,8 +8,9 @@ from loguru import logger
 from sqlalchemy import desc, extract, func
 from sqlalchemy.exc import InvalidRequestError
 
+from apps.utils.o2j import object_as_json
 from conf.db import DBSession
-from apps.attack_log_whitelist.attack_log_whitelist import attack_log_whitelist
+from apps.attack_log_whitelist.model import attack_log_whitelist
 
 
 class log_whitelist_opt:
@@ -55,19 +56,23 @@ class log_whitelist_opt:
             self.session.close()
 
     # 查询日志表白名单数据
-    def page_select_whitelist(self, page_index, page_size=10):
+    def select_whitelist(self):
         try:
-            # num = 10*int(page) - 10
+            result = list()
+            page_size = 10
             # logselect = self.session.query(attack_log_whitelist).filter(
             #     attack_log_whitelist.white == 1).order_by(
             #     desc(attack_log_whitelist.local_time),
             #     attack_log_whitelist.id).limit(page_size).offset(
             #     (page_index - 1) * page_size)
-            logselect = self.session.query(attack_log_whitelist).filter(
-                attack_log_whitelist.white == 1).order_by(
-                desc(attack_log_whitelist.local_time),
-                attack_log_whitelist.id).slice((page_index - 1) * page_size, page_index * page_size)
-            return logselect
+            # logselect = self.session.query(attack_log_whitelist).filter().order_by(
+            #     desc(attack_log_whitelist.local_time),
+            #     attack_log_whitelist.id).slice((page_index - 1) * page_size, page_index * page_size)
+            log_select = self.session.query(attack_log_whitelist).order_by(desc(attack_log_whitelist.local_time)).all()
+            # for u in log_select:
+            #     d = object_as_json(u)
+            #     result.append(d)
+            return log_select
         except InvalidRequestError:
             self.session.rollback()
         except Exception as e:
@@ -95,11 +100,11 @@ class log_whitelist_opt:
     # 按时间过滤
     # mintime:yyyy-MM-DD hh:mm:ss
     # maxtime:yyyy-MM-DD hh:mm:ss
-    def select_filter_total(self, mintime, maxtime):
+    def select_filter_total(self, min_time, max_time):
         try:
             total_filter = self.session.query(
-                func.count(attack_log_whitelist.id)).filter(attack_log_whitelist.local_time <= maxtime).filter(
-                attack_log_whitelist.local_time >= mintime
+                func.count(attack_log_whitelist.id)).filter(attack_log_whitelist.local_time <= max_time).filter(
+                attack_log_whitelist.local_time >= min_time
                 ).scalar()
             return total_filter
         except InvalidRequestError:

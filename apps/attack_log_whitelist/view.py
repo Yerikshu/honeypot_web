@@ -6,12 +6,19 @@
 # @Purpose  : 获取日志经过白名单的内容
 from fastapi import APIRouter
 from loguru import logger
+from pydantic import BaseModel
 
-from apps.attack_log_whitelist import log_whitelist_opt
+from apps.attack_log_whitelist.log_whitelist_opt import log_whitelist_opt
 
 router = APIRouter()
 
-logselect = log_whitelist_opt
+logselect = log_whitelist_opt()
+
+
+# 暂时默认分页为10页
+class Item(BaseModel):
+    white_list: int
+    page: int
 
 
 def total_atk_page():
@@ -26,7 +33,12 @@ def total_wit_page(mintime, maxtime):
     return logselect.select_filter_total(mintime, maxtime)
 
 
-@router.get("/log/white")
+@router.post("/log/white")
 @logger.catch
 async def white_log():
-    pass
+    tmp = logselect.select_whitelist()
+    it = iter(tmp)
+    result = set()
+    for i in it:
+        result.add(i)
+    return result

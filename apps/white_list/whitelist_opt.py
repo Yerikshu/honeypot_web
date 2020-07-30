@@ -30,7 +30,7 @@ class white_new:
         except InvalidRequestError:
             self.session.rollback()
         except Exception as e:
-            print(e)
+            logger.error(e)
         finally:
             self.session.close()
 
