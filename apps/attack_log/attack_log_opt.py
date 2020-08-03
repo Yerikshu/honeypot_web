@@ -4,6 +4,7 @@
 # @Date     : 7/20/20
 # @Time     : 4:58 PM
 # @Purpose  : 日志表操作
+from loguru import logger
 from sqlalchemy import desc, extract, func
 from sqlalchemy.exc import InvalidRequestError
 
@@ -29,7 +30,7 @@ class log_opt:
             except InvalidRequestError:
                 self.session.rollback()
             except Exception as e:
-                print(e)
+                logger.error(e)
             finally:
                 self.session.close()
         else:
@@ -52,7 +53,7 @@ class log_opt:
         except InvalidRequestError:
             self.session.rollback()
         except Exception as e:
-            print(e)
+            logger.error(e)
         finally:
             self.session.close()
 
@@ -62,13 +63,12 @@ class log_opt:
             attack_num = self.session.query(
                 extract('month', attack_log.local_time).label('month'),
                 func.count('*').label('count')).filter(
-                extract('year', attack_log.local_time) == months,
-                attack_log.white == 2).group_by('month').all()
+                extract('year', attack_log.local_time) == months).group_by('month').all()
             return attack_num
         except InvalidRequestError:
             self.session.rollback()
         except Exception as e:
-            print(e)
+            logger.error(e)
         finally:
             self.session.close()
 
