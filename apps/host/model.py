@@ -12,6 +12,7 @@ class host(Base):
 
     id = Column(String(50), primary_key=True)
     last_time = Column(TIMESTAMP, nullable=False)
+    local_time = Column(String(255), nullable=False)
     hostname = Column(String(50), nullable=False)
     ip = Column(String(50), nullable=False)
     status = Column(String(10), nullable=False)
@@ -28,3 +29,21 @@ def init_db():
 
 def drop_db():
     Base.metadata.drop_all(engine)
+
+
+if __name__ == "__main__":
+    drop_db()
+    print('Drop host table')
+
+    init_db()
+    print('create host table')
+
+# CREATE TABLE host (
+# 	id VARCHAR(50) NOT NULL,
+# 	last_time TIMESTAMP NOT NULL,
+# 	local_time VARCHAR(255) NOT NULL,
+# 	hostname VARCHAR(50) NOT NULL,
+# 	ip VARCHAR(50) NOT NULL,
+# 	status VARCHAR(10) NOT NULL,
+# 	PRIMARY KEY (id)
+# )

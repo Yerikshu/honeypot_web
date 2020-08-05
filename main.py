@@ -8,7 +8,7 @@ from apps.attack_log_whitelist.view import router as a_w_router
 from apps.attack_log.view import router as a_router
 
 app = FastAPI()
-app.include_router(h_router, prefix="/api")
+app.include_router(h_router)
 app.include_router(w_router, prefix="/api")
 app.include_router(a_w_router)
 app.include_router(a_router)

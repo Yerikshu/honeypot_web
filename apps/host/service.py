@@ -15,7 +15,7 @@ host = host_opt()
 def hoststatus(lasttime, hostname, ip, status):
     # 计算host表主键id
     idmd5 = hashlib.md5()
-    idmd5.update(hostname + ip)
+    idmd5.update(hostname.encode("utf-8") + ip.encode("utf-8"))
     id = idmd5.hexdigest()
     return host.insert_data(id, lasttime, hostname, ip, status)
 

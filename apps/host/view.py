@@ -43,14 +43,13 @@ async def agent_host(item: Optional[Host_info] = None):
 
     # 主机信息入库
     if hoststatus(lasttime, hostname, ip, status):
-        # TODO:这个地方是要配置日志记录，后续写上
         # log.write("insert status data ok")
-        pass
+        logger.info("insert status data ok")
 
 
 # TODO:注意完成jwt鉴权操作
 # @jwtauth
-@router.get("/gethost")
+@router.get("/api/gethost")
 @logger.catch
 async def agent_host_status():
     return getHoststatus()
