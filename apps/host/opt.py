@@ -3,21 +3,21 @@
 # @Author   : yerikyu
 # @Date     : 7/19/20
 # @Purpose  : 主机表操作
-
-
+from loguru import logger
 from sqlalchemy import desc
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.dialects.mysql import insert
 
+from apps.host.model import host
 from conf.db import DBSession
 
 
-class Host:
+class host_opt:
     def __init__(self):
         self.session = DBSession
 
     def insert_data(self, id, last_time, hostname, ip, status):
-        insert_stmt = insert(Host). \
+        insert_stmt = insert(host). \
         values(id=id, last_time=last_time, hostname=hostname, ip=ip, status=status)
 
         on_conflict_stmt = insert_stmt.on_duplicate_key_update(
@@ -38,8 +38,8 @@ class Host:
             查询在线主机
         """
         try:
-            host_online = self.session.query(Host).filter(
-                Host.status == "online").order_by(desc(Host.last_time)).all()
+            host_online = self.session.query(host).filter(
+                host.status == "online").order_by(desc(host.last_time)).all()
             return host_online
         except InvalidRequestError:
             self.session.rollback()
@@ -53,11 +53,11 @@ class Host:
             查询所有主机
         """
         try:
-            all_host = self.session.query(Host).order_by(desc(Host.last_time)).all()
+            all_host = self.session.query(host).order_by(desc(host.last_time)).all()
             return all_host
         except InvalidRequestError:
             self.session.rollback()
         except Exception as e:
-            print(e)
+            logger.error(e)
         finally:
             self.session.close()

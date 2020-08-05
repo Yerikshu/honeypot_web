@@ -7,9 +7,9 @@
 import datetime
 import hashlib
 
-from apps.host.opt import Host
+from apps.host.opt import host_opt
 
-host = Host()
+host = host_opt()
 
 
 def hoststatus(lasttime, hostname, ip, status):

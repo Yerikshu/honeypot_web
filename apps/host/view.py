@@ -28,6 +28,7 @@ class Host_info(BaseModel):
     hostname: str
     ip: str
     status: str
+    lasttime: str
 
 
 @router.post("/host")

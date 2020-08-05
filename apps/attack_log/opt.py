@@ -9,7 +9,7 @@ from sqlalchemy import desc, extract, func
 from sqlalchemy.exc import InvalidRequestError
 
 from conf.db import DBSession
-from apps.attack_log.attack_log import attack_log
+from apps.attack_log.model import attack_log
 
 
 class log_opt:

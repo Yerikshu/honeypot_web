@@ -8,7 +8,7 @@ from sqlalchemy import Column, String, TIMESTAMP, UniqueConstraint
 
 
 class host(Base):
-    __tablename__ = 'Host'
+    __tablename__ = 'host'
 
     id = Column(String(50), primary_key=True)
     last_time = Column(TIMESTAMP, nullable=False)
@@ -16,10 +16,10 @@ class host(Base):
     ip = Column(String(50), nullable=False)
     status = Column(String(10), nullable=False)
 
-    __table_args__ = (
-        # 设置联合唯一索引
-        UniqueConstraint('hostname', 'ip', name='uix_hostname_ip')
-    )
+    # __table_args__ = (
+    #     # 设置联合唯一索引
+    #     UniqueConstraint('hostname', 'ip', name='uix_hostname_ip')
+    # )
 
 
 def init_db():

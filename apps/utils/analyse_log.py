@@ -8,7 +8,7 @@
 import copy
 import datetime
 
-from apps.attack_log.attack_log_opt import log_opt
+from apps.attack_log.opt import log_opt
 from apps.attack_log_whitelist.log_whitelist_opt import log_whitelist_opt
 from conf.redis import r_activate
 
