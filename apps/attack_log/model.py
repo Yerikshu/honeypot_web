@@ -8,7 +8,7 @@ from sqlalchemy import Column, String, Integer, Unicode, TIMESTAMP, Boolean, Dat
 from conf.db import Base, engine, DBSession
 
 
-class attack_log(Base):
+class Attack_log(Base):
     __tablename__ = 'attack_log'
 
     id = Column(Integer, autoincrement=True, primary_key=True)

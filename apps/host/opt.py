@@ -8,7 +8,7 @@ from sqlalchemy import desc
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.dialects.mysql import insert
 
-from apps.host.model import host
+from apps.host.model import Host
 from conf.db import DBSession
 
 
@@ -17,7 +17,7 @@ class host_opt:
         self.session = DBSession
 
     def insert_data(self, id, last_time, hostname, ip, status):
-        host_insert = host(id=id, local_time=last_time, hostname=hostname, ip=ip, status=status)
+        host_insert = Host(id=id, local_time=last_time, hostname=hostname, ip=ip, status=status)
         # insert_stmt = insert(host). \
         # values(id=id, local_time=last_time, hostname=hostname, ip=ip, status=status)
 
@@ -43,7 +43,7 @@ class host_opt:
         """
         try:
             host_online = self.session.query(host).filter(
-                host.status == "online").order_by(desc(host.last_time)).all()
+                Host.status == "online").order_by(desc(host.last_time)).all()
             return host_online
         except InvalidRequestError:
             self.session.rollback()
@@ -57,7 +57,7 @@ class host_opt:
             查询所有主机
         """
         try:
-            all_host = self.session.query(host).order_by(desc(host.last_time)).all()
+            all_host = self.session.query(Host).order_by(desc(Host.last_time)).all()
             return all_host
         except InvalidRequestError:
             self.session.rollback()

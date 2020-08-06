@@ -8,7 +8,7 @@ from sqlalchemy import Column, String, text
 from conf.db import Base, engine
 
 
-class white_list(Base):
+class White_list(Base):
     __tablename__ = 'white_list'
     src_port = Column(String(10), nullable=False, primary_key=True)
     src_ip = Column(String(20), nullable=False, primary_key=True)

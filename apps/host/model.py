@@ -7,7 +7,7 @@ from conf.db import Base, engine
 from sqlalchemy import Column, String, TIMESTAMP, UniqueConstraint
 
 
-class host(Base):
+class Host(Base):
     __tablename__ = 'host'
 
     id = Column(String(50), primary_key=True)

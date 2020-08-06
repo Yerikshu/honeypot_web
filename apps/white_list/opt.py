@@ -5,12 +5,12 @@
 # @Time     : 4:53 PM
 # @Purpose  : 白名单表操作
 from loguru import logger
-from sqlalchemy import inspect
 from sqlalchemy.exc import InvalidRequestError
 
 from apps.utils.o2j import object_as_json
+from apps.white_list.model import White_list
 from conf.db import DBSession
-from apps.white_list.model import white_list
+
 
 
 class white_new:
@@ -22,10 +22,10 @@ class white_new:
     def whitelist_data(self):
         try:
             # 查询白名单表已激活数据
-            white_ip_res_activate = self.session.query(white_list).filter(white_list.activate == 1).order_by(
-                white_list.dst_port).all()
+            white_ip_res_activate = self.session.query(White_list).filter(White_list.activate == 1).order_by(
+                White_list.dst_port).all()
             # 查询白名单表未激活数据
-            white_ip_res_deactivate = self.session.query(white_list).filter(white_list.activate == 0).all()
+            white_ip_res_deactivate = self.session.query(White_list).filter(White_list.activate == 0).all()
             return white_ip_res_activate, white_ip_res_deactivate
         except InvalidRequestError:
             self.session.rollback()
@@ -38,7 +38,7 @@ class white_new:
     def insert_whitelist(self, item):
         try:
             tmp = item.dict()
-            wip_insert = white_list(**tmp)
+            wip_insert = White_list(**tmp)
             self.session.merge(wip_insert)
             self.session.commit()
             return True
@@ -54,7 +54,7 @@ class white_new:
     # 读取全部列
     def as_json(self):
         result = list()
-        for u in self.session.query(white_list).all():
+        for u in self.session.query(White_list).all():
             d = object_as_json(u)
             result.append(d)
         return result
