@@ -3,7 +3,7 @@
 # @Author   : yerikyu
 # @Date     : 7/19/20
 # @Purpose  : 蜜罐主机状态表
-from conf.db import Base, engine
+from conf.db import Base, engine, DBSession
 from sqlalchemy import Column, String, TIMESTAMP, UniqueConstraint
 
 

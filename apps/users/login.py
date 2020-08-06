@@ -8,13 +8,13 @@ from datetime import datetime, timedelta
 from typing import Optional
 
 from fastapi import Depends, HTTPException, status, APIRouter
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from loguru import logger
 from passlib.context import CryptContext
 from pydantic import BaseModel
 
-from apps.users.model import PydanticUser as User
+from apps.users.model import PydanticUser, User
 from conf.db import DBSession
 from conf.key import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 
@@ -39,11 +39,9 @@ class TokenData(BaseModel):
     username: Optional[str] = None
 
 
-# class User(Baseuser):
-#     username: str
-#     email: Optional[str] = None
-#     full_name: Optional[str] = None
-#     disabled: Optional[bool] = None
+class UserForm(BaseModel):
+    username: str
+    password: str
 
 
 # class UserInDB(User):
@@ -67,6 +65,7 @@ def get_password_hash(password):
 
 def get_user(username: str):
     result = DBSession.query(User).filter(User.username == username).scalar()
+    DBSession.close()
     if result:
         return result
     else:
@@ -132,7 +131,7 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
 
 
 @app.post("/token", response_model=Token)
-async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
+async def login_for_access_token(form_data: UserForm = Depends()):
     user = authenticate_user(form_data.username, form_data.password)
     if not user:
         raise HTTPException(
@@ -140,15 +139,16 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(
-        data={"sub": user.username}, expires_delta=access_token_expires
-    )
+    # access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    data_token = {"id": user.id, "role": user.username,
+                  "exp": datetime.utcnow() + timedelta(seconds=ACCESS_TOKEN_EXPIRE_MINUTES)}
+    access_token = jwt.encode(data_token, SECRET_KEY, algorithm=ALGORITHM)
+
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@app.get("/users/me/", response_model=User)
-async def read_users_me(current_user: User = Depends(get_current_active_user)):
+@app.get("/users/me/", response_model=PydanticUser)
+async def read_users_me(current_user: PydanticUser = Depends(get_current_active_user)):
     return current_user
 
 

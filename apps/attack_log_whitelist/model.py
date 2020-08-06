@@ -5,7 +5,7 @@
 # @Purpose  : 蜜罐日志经过白名单表
 from sqlalchemy import Column, String, Integer, Unicode, TIMESTAMP, Boolean, text, func, DateTime
 
-from conf.db import Base, engine
+from conf.db import Base, engine, DBSession
 
 
 class attack_log_whitelist(Base):

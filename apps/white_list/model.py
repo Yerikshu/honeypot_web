@@ -5,7 +5,7 @@
 # @Purpose  : 白名单表,可以根据需要过滤源目端口以及ip
 from sqlalchemy import Column, String, text
 
-from conf.db import Base, engine
+from conf.db import Base, engine, DBSession
 
 
 class White_list(Base):

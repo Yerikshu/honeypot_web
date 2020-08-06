@@ -9,7 +9,7 @@ from datetime import datetime
 from pydantic_sqlalchemy import sqlalchemy_to_pydantic
 from sqlalchemy import Column, String, Integer, TIMESTAMP
 
-from conf.db import Base, engine
+from conf.db import Base, engine, DBSession
 
 
 class User(Base):

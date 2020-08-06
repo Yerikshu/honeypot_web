@@ -9,7 +9,7 @@ from sqlalchemy import desc, extract, func
 from sqlalchemy.exc import InvalidRequestError
 
 from conf.db import DBSession
-from apps.attack_log.model import attack_log
+from apps.attack_log.model import Attack_log
 
 
 class log_opt:
@@ -20,7 +20,7 @@ class log_opt:
 
     def insert(self, param):
 
-        loginsert = attack_log(**param)
+        loginsert = Attack_log(**param)
 
         if loginsert:
             try:
@@ -44,10 +44,10 @@ class log_opt:
             #     desc(attack_log.local_time),
             #     attack_log.id).limit(page_size).offset(
             #     (page_index - 1) * page_size)
-            logselect = self.session.query(attack_log).filter(
-                attack_log.white == 1).order_by(
-                desc(attack_log.local_time),
-                attack_log.id).limit(page_size).slice((page_index - 1) * page_size, page_index * page_size)
+            logselect = self.session.query(Attack_log).filter(
+                Attack_log.white == 1).order_by(
+                desc(Attack_log.local_time),
+                Attack_log.id).limit(page_size).slice((page_index - 1) * page_size, page_index * page_size)
 
             return logselect
         except InvalidRequestError:
@@ -61,9 +61,9 @@ class log_opt:
     def attack_select_num(self, months):
         try:
             attack_num = self.session.query(
-                extract('month', attack_log.local_time).label('month'),
+                extract('month', Attack_log.local_time).label('month'),
                 func.count('*').label('count')).filter(
-                extract('year', attack_log.local_time) == months).group_by('month').all()
+                extract('year', Attack_log.local_time) == months).group_by('month').all()
             return attack_num
         except InvalidRequestError:
             self.session.rollback()
@@ -76,10 +76,10 @@ class log_opt:
     def pie_select_num(self, years):
         try:
             pie_num = self.session.query(
-                func.count(attack_log.logtype),
-                attack_log.logtype).group_by(attack_log.logtype).filter(
-                extract('year', attack_log.local_time) == years,
-                attack_log.white == 2).all()
+                func.count(Attack_log.logtype),
+                Attack_log.logtype).group_by(Attack_log.logtype).filter(
+                extract('year', Attack_log.local_time) == years,
+                Attack_log.white == 2).all()
             return pie_num
         except InvalidRequestError:
             self.session.rollback()
@@ -92,8 +92,8 @@ class log_opt:
     def select_attack_total(self):
         try:
             total_attack = self.session.query(
-                func.count(attack_log.id)).filter(
-                attack_log.white == 2).scalar()
+                func.count(Attack_log.id)).filter(
+                Attack_log.white == 2).scalar()
             return total_attack
         except InvalidRequestError:
             self.session.rollback()
@@ -106,8 +106,8 @@ class log_opt:
     def select_filter_total(self):
         try:
             total_filter = self.session.query(
-                func.count(attack_log.id)).filter(
-                attack_log.white == 1).scalar()
+                func.count(Attack_log.id)).filter(
+                Attack_log.white == 1).scalar()
             return total_filter
         except InvalidRequestError:
             self.session.rollback()
