@@ -10,7 +10,7 @@ from sqlalchemy.exc import InvalidRequestError
 
 from apps.utils.o2j import object_as_json
 from conf.db import DBSession
-from apps.white_list.white_list_model import white_list
+from apps.white_list.model import white_list
 
 
 class white_new:

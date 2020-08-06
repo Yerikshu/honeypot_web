@@ -6,8 +6,10 @@ from apps.host.view import router as h_router
 from apps.white_list.view import router as w_router
 from apps.attack_log_whitelist.view import router as a_w_router
 from apps.attack_log.view import router as a_router
+from apps.users.login import app as login_router
 
 app = FastAPI()
+app.include_router(login_router)
 app.include_router(h_router)
 app.include_router(w_router, prefix="/api")
 app.include_router(a_w_router)

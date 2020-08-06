@@ -27,8 +27,7 @@ api设计基于fastapi
 蜜罐的agent服务已经打包好并上传在腾讯云的docker 仓库，可以自行下载并安装，agent的[源码](https://github.com/thinkst/opencanary)，由于其目前只能适用于python2版本，后续计划升级到python3版本，目前先制作docker镜像暂时解决代码不能运行在新版服务器上面的问题
 
 
-具体使用可以看看隔壁agent项目介绍
+具体使用可以看看隔壁agent项目[介绍](https://github.com/Yerikshu/opencanary)
 
-
-https://github.com/Yerikshu/opencanary
-
+# 使用指南
+1. 首次使用为了安全起见，建议使用` openssl rand -hex 32`更新秘钥并替换在` conf/key.py`中

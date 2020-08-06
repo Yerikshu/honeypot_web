@@ -4,7 +4,7 @@
 # @Date     : 7/28/20
 # @Time     : 9:56 AM
 # @Purpose  : 数据包规则匹配实现基于策略的四元组进行匹配
-from apps.white_list.whitelist_opt import white_new
+from apps.white_list.opt import white_new
 from conf.redis import r_activate, r_deactivate
 
 white_res_activate, white_res_deactivate = white_new().whitelist_data()

@@ -9,7 +9,7 @@ from typing import Optional
 from loguru import logger
 from pydantic import BaseModel
 
-from apps.white_list.whitelist_opt import white_new
+from apps.white_list.opt import white_new
 
 from fastapi.routing import APIRouter
 
