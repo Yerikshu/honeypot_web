@@ -4,6 +4,7 @@
 # @Date     : 7/29/20
 # @Time     : 4:19 PM
 # @Purpose  : 获取日志经过白名单的内容
+import jwt
 from fastapi import APIRouter
 from loguru import logger
 from pydantic import BaseModel
